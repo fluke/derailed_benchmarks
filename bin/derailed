@@ -83,9 +83,12 @@ class DerailedBenchmarkCLI < Thor
         if ENV["DERAILED_SKIP_RAILS_REQUIRES"]
           # do nothing. your app will handle requiring Rails for booting.
         elsif ENV["DERAILED_SKIP_ACTIVE_RECORD"]
+          require "active_record/railtie"
+          require "active_storage/engine"
           require "action_controller/railtie"
-          require "sprockets/railtie"
-          require "rails/test_unit/railtie"
+          require "action_view/railtie"
+          require "action_mailer/railtie"
+          require "active_job/railtie"
         else
           require 'rails/all'
         end
